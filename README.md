@@ -1,0 +1,2 @@
+# fdict
+fixed memory dict
