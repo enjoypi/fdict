@@ -1,4 +1,6 @@
 #include "fdict.h"
+#include <memory.h>
+#include <math.h>
 
 typedef struct fdict
 {
@@ -9,7 +11,7 @@ size_t bucket_size;
 size_t key_size;
 size_t max_key_amount;
 size_t value_size;
-size_t max_key_amount;
+size_t max_value_amount;
 
 void* data;
 } fdict;
@@ -28,7 +30,7 @@ fdict* fdict_new(size_t key_size, size_t max_key_amount, size_t value_size, size
     fdict* dict = (fdict*) mem;
     dict->data = mem + sizeof(fdict);
     dict->bucket_size = 8;
-    dict->bucket_amount = max_key_amount / dict->bucket_size;
+    dict->bucket_amount = ceil(max_key_amount / dict->bucket_size);
 }
 
 void* fdict_find(fdict*, void* key, size_t key_size);
